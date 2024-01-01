@@ -28,18 +28,25 @@ function Carousel({ photos, title }) {
     setCurrCardIdx(currCardIdx === 0 ? total - 1 : currCardIdx - 1);
   }
 
+  const isLast = photos[currCardIdx] === photos[total - 1];
+  const isFirst = photos[currCardIdx] === photos[0];
+
   return (
     <div className="Carousel">
       <h1>{title}</h1>
       <div className="Carousel-main">
-        <i className="bi bi-arrow-left-circle" onClick={goBackwords} />
+        {isFirst ? null : (
+          <i className="bi bi-arrow-left-circle" onClick={goBackwords} />
+        )}
         <Card
           caption={currCard.caption}
           src={currCard.src}
           currNum={currCardIdx + 1}
           totalNum={total}
         />
-        <i className="bi bi-arrow-right-circle" onClick={goForward} />
+        {isLast ? null : (
+          <i className="bi bi-arrow-right-circle" onClick={goForward} />
+        )}
       </div>
     </div>
   );
